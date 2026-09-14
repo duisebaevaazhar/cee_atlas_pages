@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CEE Automotive Market Atlas 2026</title>
+<style>body{font-family:Inter,Segoe UI,Arial,sans-serif;margin:0;background:#f6f8fb;color:#18334d;display:grid;place-items:center;min-height:100vh}.box{max-width:560px;padding:32px;text-align:center}.spinner{width:34px;height:34px;border:3px solid #dfe5ec;border-top-color:#2d6cdf;border-radius:50%;margin:0 auto 18px;animation:s 1s linear infinite}@keyframes s{to{transform:rotate(360deg)}}p{color:#667085}</style>
+</head>
+<body>
+<div class="box"><div class="spinner"></div><h2>Загружаем CEE Automotive Market Atlas</h2><p>Отчёт откроется автоматически.</p></div>
+<script>
+(async()=>{
+  try{
+    const files=['report.0.b64','report.1.b64','report.2.b64','report.3.b64','report.4.b64'];
+    const parts=await Promise.all(files.map(f=>fetch(f).then(r=>{if(!r.ok)throw new Error('Не удалось загрузить '+f);return r.text()})));
+    const b64=parts.join('').replace(/\s/g,'');
+    const bin=atob(b64);
+    const bytes=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+    if(!('DecompressionStream' in window))throw new Error('Браузер не поддерживает распаковку отчёта. Откройте ссылку в актуальной версии Chrome, Edge, Safari или Firefox.');
+    const ds=new DecompressionStream('gzip');
+    const stream=new Blob([bytes]).stream().pipeThrough(ds);
+    const html=await new Response(stream).text();
+    document.open();document.write(html);document.close();
+  }catch(e){document.body.innerHTML='<div class="box"><h2>Не удалось открыть отчёт</h2><p>'+e.message+'</p></div>';console.error(e)}
+})();
+</script>
+</body>
+</html>
