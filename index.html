@@ -7,12 +7,12 @@
 <style>body{font-family:Inter,Segoe UI,Arial,sans-serif;margin:0;background:#f6f8fb;color:#18334d;display:grid;place-items:center;min-height:100vh}.box{max-width:560px;padding:32px;text-align:center}.spinner{width:34px;height:34px;border:3px solid #dfe5ec;border-top-color:#2d6cdf;border-radius:50%;margin:0 auto 18px;animation:s 1s linear infinite}@keyframes s{to{transform:rotate(360deg)}}p{color:#667085}</style>
 </head>
 <body>
-<div class="box"><div class="spinner"></div><h2>Загружаем CEE Automotive Market Atlas</h2><p>Отчёт откроется автоматически.</p></div>
+<div class="box"><div class="spinner"></div><h2>Загружаем CEE Automotive Market Atlas</h2><p>Открываем обновлённую версию отчёта.</p></div>
 <script>
 (async()=>{
   try{
-    const files=['report.0.b64','report.1.b64','report.2a.b64','report.2b.b64','report.3.b64','report.4.b64'];
-    const parts=await Promise.all(files.map(f=>fetch(f).then(r=>{if(!r.ok)throw new Error('Не удалось загрузить '+f);return r.text()})));
+    const files=['v11.0.b64','v11.1.b64','v11.2.b64','v11.3.b64','v11.4.b64','v11.5.b64'];
+    const parts=await Promise.all(files.map(f=>fetch(f+'?v=11').then(r=>{if(!r.ok)throw new Error('Не удалось загрузить '+f);return r.text()})));
     const b64=parts.join('').replace(/\s/g,'');
     const bin=atob(b64);
     const bytes=new Uint8Array(bin.length);
