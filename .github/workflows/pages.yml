@@ -32,6 +32,7 @@ jobs:
           import hashlib
           import json
           import os
+          import shutil
           from pathlib import Path
 
           parts = [Path(f"v11.{i}.b64").read_text(encoding="ascii") for i in range(6)]
@@ -45,6 +46,16 @@ jobs:
           for marker in ('id="buying"', 'class="card country-deal"', 'id="dealer-tech"', 'id="digital-stack360"'):
               if marker not in text:
                   raise SystemExit(f"Required V11 section missing: {marker}")
+
+          # Verify MYLEADS bundle can be reconstructed before deploy.
+          myleads_parts = [Path(f"myleads/page.{i}.b64").read_text(encoding="ascii") for i in range(5)]
+          myleads_packed = base64.b64decode("".join("".join(myleads_parts).split()), validate=True)
+          myleads_page = gzip.decompress(myleads_packed)
+          myleads_text = myleads_page.decode("utf-8")
+          for marker in ('id="legal"', 'id="insurers"', 'id="payment"', 'id="sources"'):
+              if marker not in myleads_text:
+                  raise SystemExit(f"Required MYLEADS section missing: {marker}")
+
           output = Path("_site")
           output.mkdir(exist_ok=True)
           (output / "index.html").write_bytes(page)
@@ -55,7 +66,14 @@ jobs:
               "commit": os.environ.get("GITHUB_SHA", ""),
               "format": "standalone-html"
           }, indent=2), encoding="utf-8")
+
+          target = output / "myleads"
+          if target.exists():
+              shutil.rmtree(target)
+          shutil.copytree("myleads", target)
+
           print(f"Verified V11: {len(page)} bytes; SHA256 {digest}")
+          print(f"Verified MYLEADS: {len(myleads_page)} bytes")
           PY
       - name: Setup Pages
         uses: actions/configure-pages@v5
