@@ -72,8 +72,16 @@ jobs:
               shutil.rmtree(target)
           shutil.copytree("myleads", target)
 
+          studio_source = Path("studio")
+          studio_target = output / "studio"
+          if studio_source.exists():
+              if studio_target.exists():
+                  shutil.rmtree(studio_target)
+              shutil.copytree(studio_source, studio_target)
+
           print(f"Verified V11: {len(page)} bytes; SHA256 {digest}")
           print(f"Verified MYLEADS: {len(myleads_page)} bytes")
+          print("Included STUDIO concept page")
           PY
       - name: Setup Pages
         uses: actions/configure-pages@v5
