@@ -79,9 +79,20 @@ jobs:
                   shutil.rmtree(studio_target)
               shutil.copytree(studio_source, studio_target)
 
+          mycar_source = Path("mycar-pro")
+          mycar_target = output / "mycar-pro"
+          if not mycar_source.exists():
+              raise SystemExit("MyCar Pro source folder missing")
+          if mycar_target.exists():
+              shutil.rmtree(mycar_target)
+          shutil.copytree(mycar_source, mycar_target)
+          if not (mycar_target / "index.html").exists():
+              raise SystemExit("MyCar Pro index.html missing")
+
           print(f"Verified V11: {len(page)} bytes; SHA256 {digest}")
           print(f"Verified MYLEADS: {len(myleads_page)} bytes")
           print("Included STUDIO concept page")
+          print("Included MyCar Pro process map")
           PY
       - name: Setup Pages
         uses: actions/configure-pages@v5
