@@ -175,6 +175,24 @@ td.desc{max-width:420px;color:#526476;line-height:1.45} tbody tr:hover{backgroun
 @media(max-width:1050px){.exec-line{grid-template-columns:repeat(4,1fr);row-gap:18px}.exec-line:before{display:none}}
 @media(max-width:650px){.exec-line{grid-template-columns:repeat(2,1fr)}.exec-summary{grid-template-columns:1fr}}
 
+
+/* Conclusions and external-market readiness */
+.conclusion-grid{display:grid;grid-template-columns:380px minmax(0,1fr);gap:16px;align-items:start}
+.summary-stack{display:grid;gap:12px}.summary-card{padding:18px}.summary-card h3{margin:12px 0 7px;font-size:17px;letter-spacing:-.02em}.summary-card p{margin:0;color:var(--muted);font-size:12px}
+.score-row{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:10px}.score-big{font-size:34px;line-height:1;font-weight:800;letter-spacing:-.05em}.score-caption{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+.score-bar{height:10px;border-radius:999px;background:#ecf1f5;overflow:hidden;border:1px solid #dde6ee}.score-bar>span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#8fb6ff,#1967d2)}.score-bar.future>span{background:linear-gradient(90deg,#7edbb0,#17795a)}
+.big-badge{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800}.big-badge.good{background:var(--green-soft);color:var(--green)}.big-badge.mid{background:var(--amber-soft);color:var(--amber)}.big-badge.risk{background:var(--red-soft);color:var(--red)}
+.diagram-card{padding:18px}.diagram-card h3{margin:0 0 6px;font-size:17px}.diagram-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:8px}
+.radar-wrap{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:14px;align-items:center}#radarSvg{width:100%;height:520px;background:radial-gradient(circle at center,#fbfdff 0,#f4f8fc 70%,#f1f5f9 100%);border:1px solid var(--line);border-radius:20px}
+.radar-legend{display:grid;gap:8px}.radar-pill{display:flex;gap:10px;align-items:flex-start;padding:10px 11px;background:var(--surface-soft);border:1px solid var(--line);border-radius:12px;font-size:12px}.swatch{width:12px;height:12px;border-radius:50%;margin-top:3px;flex:0 0 12px}
+.takeaways{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.take-card{padding:16px}.take-card h3{margin:0 0 8px;font-size:16px}.take-card ul{margin:0;padding-left:18px}.take-card li{margin:7px 0;font-size:12px;color:#445565}
+.market-block{margin-top:16px;padding:18px}.market-head{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:18px;align-items:start}.market-head h3{margin:0 0 6px;font-size:19px}.market-verdict{padding:13px 14px;border-radius:14px;background:#fff7e8;border:1px solid #efddb7}.market-verdict b{display:block;font-size:13px;color:#82570b}.market-verdict span{display:block;margin-top:4px;font-size:11px;color:#775f35}
+.market-table-wrap{overflow:auto;margin-top:14px;border:1px solid var(--line);border-radius:14px}.market-table{min-width:1120px}.market-table th:nth-child(1){width:190px}.market-table th:nth-child(2){width:150px}.market-table th:nth-child(3){width:150px}.market-table th:nth-child(4){width:280px}.market-table th:nth-child(5){width:300px}
+.score-dot{display:inline-flex;align-items:center;gap:7px;font-weight:800}.score-dot:before{content:"";width:9px;height:9px;border-radius:50%;background:#98a8b6}.score-dot.low:before{background:#d46868}.score-dot.mid:before{background:#d6a43c}.score-dot.good:before{background:#43a77d}.unknown{color:#7b8894;font-style:italic}
+.market-bottom{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.market-mini{padding:14px;background:var(--surface-soft);border:1px solid var(--line);border-radius:13px}.market-mini b{display:block;font-size:12px;margin-bottom:5px}.market-mini span{font-size:11px;color:var(--muted);line-height:1.45}
+.conclusion-note{margin-top:14px;padding:12px 14px;background:#f8fbff;border:1px solid #dce8f6;border-radius:14px;font-size:12px;color:#53687b}
+@media(max-width:1100px){.conclusion-grid,.radar-wrap,.takeaways,.market-head,.market-bottom{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -214,6 +232,7 @@ td.desc{max-width:420px;color:#526476;line-height:1.45} tbody tr:hover{backgroun
     <button class="tab" data-tab="systems">Где передаются данные</button>
     <button class="tab" data-tab="gaps">Где процесс может ломаться</button>
     <button class="tab" data-tab="registry">Реестр</button>
+    <button class="tab" data-tab="conclusions">Выводы</button>
   </nav>
 
   <section class="section active" data-section="overview">
@@ -389,6 +408,79 @@ td.desc{max-width:420px;color:#526476;line-height:1.45} tbody tr:hover{backgroun
     </div>
   </section>
 
+
+  <section class="section" data-section="conclusions">
+    <div class="section-head"><div><h2>Выводы</h2><div class="hint">Две разные оценки: насколько MyCar Pro жизнеспособен как внутренняя система сегодня и в 2027 году, и насколько его реально можно вывести как самостоятельный продукт на другой рынок.</div></div></div>
+
+    <div class="conclusion-grid">
+      <div class="summary-stack">
+        <div class="card summary-card">
+          <div class="score-row"><div><div class="score-caption">Жизнеспособность сейчас</div><div class="score-big">66%</div></div><span class="big-badge mid">Рабочая, но не цельная</span></div>
+          <div class="score-bar"><span style="width:66%"></span></div>
+          <h3>Уже полезна как операционная платформа</h3>
+          <p>Система закрывает большую часть пути автомобиля, особенно заказ, поставку, сток, перемещения и передачу дилеру. Слабое место — переходы между модулями и смежными системами: там всё ещё важны правильные действия людей и синхронность статусов.</p>
+        </div>
+        <div class="card summary-card">
+          <div class="score-row"><div><div class="score-caption">Жизнеспособность в 2027</div><div class="score-big">87%</div></div><span class="big-badge good">Сильная целевая модель</span></div>
+          <div class="score-bar future"><span style="width:87%"></span></div>
+          <h3>Может стать цельной системой управления автомобилем</h3>
+          <p>Если реализовать запланированные функции и довести единые статусы, данные и интеграции, платформа будет закрывать почти весь жизненный цикл автомобиля — от потребности до сервиса после продажи.</p>
+        </div>
+        <div class="card summary-card">
+          <div class="score-row"><div><div class="score-caption">Соответствие формату «система 360»</div><div class="score-big">61% → 86%</div></div></div>
+          <h3>Сейчас — частично. В 2027 — в целом да.</h3>
+          <p>Под «360» здесь понимается не просто много модулей, а одна цифровая история автомобиля: единый VIN, единые статусы, понятный владелец каждого этапа и отсутствие провалов между системами.</p>
+        </div>
+      </div>
+      <div class="card diagram-card">
+        <div class="diagram-head"><div><h3>Насколько MyCar Pro похож на систему 360</h3><div class="hint">Чем дальше зона от центра, тем лучше закрыт соответствующий контур. Синяя зона — текущая версия, зелёная — целевая модель 2027.</div></div></div>
+        <div class="radar-wrap">
+          <svg id="radarSvg" viewBox="0 0 760 520" xmlns="http://www.w3.org/2000/svg" aria-label="Диаграмма соответствия системе 360"></svg>
+          <div class="radar-legend">
+            <div class="radar-pill"><span class="swatch" style="background:#1967d2"></span><div><b>Сегодня</b><div style="color:var(--muted)">Сильное операционное ядро, но не все этапы и системы сшиты одинаково хорошо.</div></div></div>
+            <div class="radar-pill"><span class="swatch" style="background:#17795a"></span><div><b>2027</b><div style="color:var(--muted)">Почти замкнутый контур, если будут реализованы интеграции и единые правила данных.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaways">
+      <div class="card take-card"><span class="badge live">Что уже сильно</span><h3>Сильные стороны</h3><ul><li>Хорошо просматривается полный путь автомобиля по VIN.</li><li>Сильные контуры заказа, логистики, стока, перемещений и B2B-передачи.</li><li>Есть собственные бизнес-процессы и ролевые кабинеты, а не только витрина данных.</li></ul></div>
+      <div class="card take-card"><span class="badge work">Где не хватает до 360</span><h3>Основные разрывы</h3><ul><li>Часть ценности зависит от корректной работы CRM, 1С, DMS и внешних систем.</li><li>Единая история продажи, выдачи и сервиса сегодня выглядит слабее логистического контура.</li><li>Человеческий фактор остаётся значимым в местах передачи ответственности между системами и ролями.</li></ul></div>
+      <div class="card take-card"><span class="badge plan">Что критично к 2027</span><h3>Условия успеха</h3><ul><li>Единый источник статуса по каждому этапу и понятный владелец данных.</li><li>Автоматическая передача событий между системами без ручной сверки.</li><li>Связь продажи и сервиса с тем же VIN и той же историей клиента.</li></ul></div>
+    </div>
+
+    <div class="card market-block">
+      <div class="market-head">
+        <div><h3>Можно ли вывести MyCar Pro на другой рынок?</h3><div class="hint">Здесь оценивается уже не функциональность внутри текущей компании, а продуктовая самостоятельность: сможет ли другой дистрибьютор или дилерская группа внедрить систему без копирования всей существующей инфраструктуры и экспертизы команды.</div></div>
+        <div class="market-verdict"><b>Предварительный вывод: сегодня — скорее нет</b><span>К 2027 году — потенциально да, но только если вместе с функциональным развитием будет отдельная работа по превращению внутренней системы в переносимую платформу.</span></div>
+      </div>
+      <div class="market-table-wrap">
+        <table class="market-table">
+          <thead><tr><th>Критерий</th><th>Сейчас</th><th>2027</th><th>Что видно по проекту</th><th>Что нужно для выхода на другой рынок</th></tr></thead>
+          <tbody>
+            <tr><td><b>Собственное ядро продукта</b></td><td><span class="score-dot mid">Средне</span></td><td><span class="score-dot good">Высоко</span></td><td>Есть собственные процессы по заказу, логистике, стоку, B2B, ролям, гарантии и запчастям.</td><td>Чётко определить, какие функции MyCar Pro выполняет сам, а какие только отображает из других систем.</td></tr>
+            <tr><td><b>Зависимость от человеческого фактора</b></td><td><span class="score-dot mid">Заметная</span></td><td><span class="score-dot good">Умеренная</span></td><td>В реестре много автоматизации, но остаются места передачи ответственности, документов и статусов между участниками.</td><td>Автоматизировать критические переходы, исключить ручные сверки и встроить контроль исключений.</td></tr>
+            <tr><td><b>Зависимость от CRM / 1С / DMS</b></td><td><span class="score-dot low">Высокая</span></td><td><span class="score-dot mid">Средняя</span></td><td>Система явно предполагает двусторонние интеграции и опирается на внешние учётные и клиентские контуры.</td><td>Нужны стабильные API и адаптеры: замена CRM, ERP или DMS не должна требовать переписывать ядро.</td></tr>
+            <tr><td><b>Единые данные и статусы</b></td><td><span class="score-dot mid">Частично</span></td><td><span class="score-dot good">Высоко</span></td><td>Есть VIN-карточка, сводный сток, справочники и планы синхронизации, но много точек обмена.</td><td>Зафиксировать мастер-систему для каждого типа данных и единый словарь статусов.</td></tr>
+            <tr><td><b>Настройка под нового клиента без разработки</b></td><td><span class="score-dot low">Не подтверждено</span></td><td><span class="score-dot mid">Не подтверждено</span></td><td>В реестре есть роли, оргструктура и справочники, но не видно полноценного конструктора процессов и настроек клиента.</td><td>Нужны настраиваемые маршруты, роли, справочники, бренды, документы и бизнес-правила без доработки кода.</td></tr>
+            <tr><td><b>Разделение разных клиентов / компаний</b></td><td><span class="score-dot low">Не подтверждено</span></td><td><span class="score-dot mid">Не подтверждено</span></td><td>Есть разграничение ролей и организаций, но реестр не доказывает полноценную изоляцию независимых клиентов.</td><td>Нужна архитектура, где данные одной компании изолированы от другой, при этом обновления платформы остаются управляемыми.</td></tr>
+            <tr><td><b>Переносимость в другую страну</b></td><td><span class="score-dot low">Низкая / неясно</span></td><td><span class="score-dot mid">Средняя</span></td><td>Есть локальные зависимости: ЭПТС, утильсбор, таможенные и государственные интеграции.</td><td>Отделить локальные регуляторные модули от общего ядра и подключать их как заменяемые адаптеры по стране.</td></tr>
+            <tr><td><b>Самостоятельная ценность без «родной» инфраструктуры</b></td><td><span class="score-dot mid">Средняя</span></td><td><span class="score-dot good">Высокая потенциально</span></td><td>Заказ, логистика, сток и B2B уже сами по себе создают ценность, но продажа и финальный учёт тесно связаны со смежными системами.</td><td>Определить минимальный самостоятельный продукт: какие задачи клиент решит даже без текущих CRM/1С/DMS.</td></tr>
+            <tr><td><b>Масштабирование и подключение нового клиента</b></td><td><span class="score-dot low">Не подтверждено</span></td><td><span class="score-dot mid">Не подтверждено</span></td><td>Реестр хорошо описывает функции, но почти ничего не говорит о развёртывании, обновлениях и подключении нового клиента.</td><td>Автоматизированное развёртывание, типовой onboarding, мониторинг, SLA и управление версиями.</td></tr>
+            <tr><td><b>Коммерческая продуктовая упаковка</b></td><td><span class="score-dot low">Не видно</span></td><td><span class="score-dot mid">Отдельная задача</span></td><td>Текущий материал описывает внутреннюю систему и процессы, а не рыночный продукт.</td><td>Тарифы, лицензирование, документация, поддержка, демонстрационный контур, договорная модель и понятная ценность для внешнего клиента.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="market-bottom">
+        <div class="market-mini"><b>Что можно продавать раньше всего</b><span>Самостоятельное ядро «заказ → логистика → сток → B2B» выглядит наиболее зрелым кандидатом для внешней продуктовой упаковки.</span></div>
+        <div class="market-mini"><b>Главный архитектурный риск</b><span>Если логика продукта зашита в конкретные CRM, 1С, DMS и локальные государственные сервисы, масштабирование на другой рынок будет превращаться в отдельный интеграционный проект для каждого клиента.</span></div>
+        <div class="market-mini"><b>Главный критерий готовности</b><span>Новый клиент должен подключаться в основном через настройки и стандартные адаптеры, а не через переписывание процессов и кода под его инфраструктуру.</span></div>
+      </div>
+    </div>
+    <div class="conclusion-note"><b>Методика:</b> оценки выше — аналитическая интерпретация текущего реестра функций, а не технический аудит архитектуры. Там, где реестр не подтверждает мультиклиентность, изоляцию данных, развёртывание или продуктовую упаковку, это прямо отмечено как «не подтверждено».</div>
+  </section>
+
   <div class="footer">Основа сайта — исходный реестр модулей на 2027 год и уже работающих функций. Статус показывается по каждой функции отдельно: что уже работает, что сейчас тестируется или дорабатывается и что запланировано на 2027 год.</div>
 </div>
 
@@ -490,7 +582,39 @@ function openModule(name, opener){ const m=moduleByName(name); if(!m)return; las
 function closeDrawer(){ if(detailModal.hidden) return; detailModal.hidden=true; detailModal.setAttribute('aria-hidden','true'); document.body.classList.remove('modal-open'); if(lastOpener&&lastOpener.focus) lastOpener.focus(); }
 detailModal.addEventListener('click',e=>{ if(e.target.closest('[data-close-detail]')){ e.preventDefault(); closeDrawer(); } }); document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!detailModal.hidden) closeDrawer(); });
 
-renderJourney(); renderB2B(); renderRACI(); renderSystems(); renderGaps(); renderRegistry();
+
+const CONCLUSION_RADAR={
+ labels:['Путь автомобиля','Логистика','Сток и перемещения','B2B-передача','Продажа и выдача','Сервис после продажи','Единые данные','Интеграции и управление'],
+ now:[74,79,77,73,58,55,42,48],
+ future:[92,90,89,88,84,82,80,83]
+};
+function polarPoint(cx,cy,r,a){return [cx+Math.cos(a)*r,cy+Math.sin(a)*r]}
+function smoothPolygon(points){
+ if(!points.length)return '';
+ let d='M '+points[0][0].toFixed(1)+' '+points[0][1].toFixed(1);
+ for(let i=0;i<points.length;i++){
+  const p0=points[(i-1+points.length)%points.length],p1=points[i],p2=points[(i+1)%points.length],p3=points[(i+2)%points.length];
+  const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];
+  d+=' C '+c1[0].toFixed(1)+' '+c1[1].toFixed(1)+', '+c2[0].toFixed(1)+' '+c2[1].toFixed(1)+', '+p2[0].toFixed(1)+' '+p2[1].toFixed(1);
+ }
+ return d+' Z';
+}
+function renderConclusionRadar(){
+ const svg=document.getElementById('radarSvg'); if(!svg)return;
+ const c=CONCLUSION_RADAR,cx=320,cy=260,maxR=168,n=c.labels.length,angles=c.labels.map((_,i)=>-Math.PI/2+i*2*Math.PI/n);
+ const rings=[25,50,75,100],nowPts=c.now.map((v,i)=>polarPoint(cx,cy,maxR*v/100,angles[i])),futurePts=c.future.map((v,i)=>polarPoint(cx,cy,maxR*v/100,angles[i]));
+ let out='<defs><filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#7aa2d8" flood-opacity=".14"/></filter></defs>';
+ rings.forEach(fr=>{const pts=angles.map(a=>polarPoint(cx,cy,maxR*fr/100,a));out+='<polygon points="'+pts.map(p=>p.join(',')).join(' ')+'" fill="none" stroke="'+(fr===100?'#c9d8e6':'#dde7f0')+'" stroke-width="1.2"/>';});
+ angles.forEach(a=>{const p=polarPoint(cx,cy,maxR,a);out+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="#dfe7ef" stroke-width="1"/>';});
+ out+='<path d="'+smoothPolygon(futurePts)+'" fill="rgba(23,121,90,.16)" stroke="#17795a" stroke-width="3" filter="url(#soft)"/>';
+ out+='<path d="'+smoothPolygon(nowPts)+'" fill="rgba(25,103,210,.18)" stroke="#1967d2" stroke-width="3" filter="url(#soft)"/>';
+ futurePts.forEach(p=>out+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" fill="#17795a"/>'); nowPts.forEach(p=>out+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" fill="#1967d2"/>');
+ out+='<circle cx="'+cx+'" cy="'+cy+'" r="27" fill="#fff" stroke="#dbe4ec"/><text x="'+cx+'" y="'+(cy-2)+'" text-anchor="middle" font-size="12" font-weight="800" fill="#33495f">360</text><text x="'+cx+'" y="'+(cy+14)+'" text-anchor="middle" font-size="10" fill="#708396">система</text>';
+ angles.forEach((a,i)=>{const p=polarPoint(cx,cy,maxR+43,a),anchor=p[0]<cx-20?'end':p[0]>cx+20?'start':'middle';const words=c.labels[i].split(' '),cut=Math.ceil(words.length/2),l1=words.slice(0,cut).join(' '),l2=words.slice(cut).join(' ');out+='<text x="'+p[0]+'" y="'+p[1]+'" text-anchor="'+anchor+'" font-size="11" font-weight="700" fill="#455a6d"><tspan x="'+p[0]+'">'+l1+'</tspan>'+(l2?'<tspan x="'+p[0]+'" dy="13">'+l2+'</tspan>':'')+'</text>';});
+ svg.innerHTML=out;
+}
+
+renderJourney(); renderB2B(); renderRACI(); renderSystems(); renderGaps(); renderRegistry(); renderConclusionRadar();
 </script>
 </body>
 </html>
